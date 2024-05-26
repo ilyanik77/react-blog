@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
-import { format } from 'date-fns'
+import './newPost.css'
+
+import { MdPostAdd } from 'react-icons/md'
+import { MdCancelPresentation } from "react-icons/md";
+
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { addPost } from './redux/features/post/postSlice.js'
+import { addPost } from '../../redux/features/post/postSlice.js'
 
+import { format } from 'date-fns'
 import { v4 } from 'uuid'
 
 const NewPost = () => {
@@ -23,7 +28,6 @@ const NewPost = () => {
 				body: text,
 				datetime: format(new Date(), 'MMM dd, yyyy pp'),
 			}
-						
 
 			dispatch(addPost(newPost))
 			navigate('/')
@@ -38,9 +42,10 @@ const NewPost = () => {
 	}
 
 	return (
-		<main className='newPost'>
-			<h2>New Post</h2>
-			<form className='newPostForm' onSubmit={e => e.preventDefault()}>
+		<section className='newPost'>
+			
+			<h2 className='postTitle'>New Post</h2>
+			<form className='postForm' onSubmit={e => e.preventDefault()}>
 				<label className=''>
 					Прикрепить изорбажение:
 					<input
@@ -49,9 +54,7 @@ const NewPost = () => {
 						onChange={e => setImage(URL.createObjectURL(e.target.files[0]))}
 					/>
 				</label>
-				<div>
-					{ <img src={image} alt={image.name} />}
-				</div> 
+				<div>{<img src={image} alt={image.name} />}</div>
 
 				<label className='/'>
 					Заголовок поста:
@@ -66,29 +69,22 @@ const NewPost = () => {
 				<label className=''>
 					Текст поста:
 					<textarea
-						onChange={e => setText(e.target.value)}
 						value={text}
+						onChange={e => setText(e.target.value)}
 						className=''
 					/>
 				</label>
 
 				<div className=''>
-					<button
-						onClick={submitHandler}
-						//className='flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4'
-					>
-						Добавить
-					</button>
+					<MdPostAdd className='addPost' onClick={submitHandler} />
 
-					<button
+					<MdCancelPresentation
+						className='cancelPost'
 						onClick={clearFormHandler}
-						//className='flex justify-center items-center bg-red-500 text-xs text-white rounded-sm py-2 px-4'
-					>
-						Отменить
-					</button>
+					/>
 				</div>
 			</form>
-		</main>
+		</section>
 	)
 }
 

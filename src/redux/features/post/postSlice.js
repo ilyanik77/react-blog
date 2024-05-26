@@ -56,7 +56,7 @@ export const postSlice = createSlice({
 			state.posts = state.posts.filter(post => post.id !== action.payload)
 		},
 
-		editPost: (state, action) => {console.log('OK');state.posts.push(action.payload)}
+		editPost: (state, action) => {state.posts.push(action.payload)}
 	},
 })
 

@@ -2,12 +2,12 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 //, { useState, useEffect }
 //import { format } from "date-fns";
-import Home from "./Home";
+import Home from "./components/Home/Home";
 import Layout from "./Layout";
 import About from "./About";
 import Missing from "./Missing";
-import PostPage from "./PostPage";
-import NewPost from "./NewPost";
+import PostPage from "./components/PostPage/PostPage";
+import NewPost from './components/NewPost/NewPost'
 import EditPost from "./EditPost";
 
 

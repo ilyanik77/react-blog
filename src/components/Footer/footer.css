@@ -1,0 +1,27 @@
+.footer {
+    background-color: #66d8f5;
+    text-align: center;
+    padding: 20px 10px;
+   
+}
+
+.footerContent {
+    display: flex;
+    align-items: center;
+}
+
+.footerDesription {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footerTitle {
+    font-size: 44px;
+}
+
+.year  {
+    font-size: 18px;
+    
+}

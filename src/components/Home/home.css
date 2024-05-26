@@ -1,0 +1,7 @@
+.postsList {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    gap: 10px;
+}
