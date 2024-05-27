@@ -52,15 +52,22 @@
 }
 
 .likesBox {
+    width: 100px;
     display: flex;
     align-items: center;
+    background-color: #ede7e7;
+    border-radius: 10px;
 }
 
 .like {
-    width: 40px;
+    width: 35px;
     height: 40px;
-    margin-right: 15px;
+    margin: 0 15px;
     cursor: pointer;
+}
+
+.like:hover {
+    transform: scale(1.2);
 }
 
 .buttonBox {
@@ -69,19 +76,30 @@
 
 .deleteBtn{
     margin-left: 15px;
-    width: 40px;
+    width: 80px;
     height: 40px;
     color: red;
+    background-color: #ede7e7;
+    border-radius: 10px;
     cursor: pointer;
+    transition: .2s linear;
 }
 
 .editBtn{
     margin-left: 15px;
-    width: 40px;
+    width: 80px;
     height: 40px;
+    background-color: #ede7e7;
+    border-radius: 10px;
     color: orangered;
     cursor: pointer;
-    background-color: transparent;
+    transition: .2s linear;
+
+}
+
+.deleteBtn:hover,
+.editBtn:hover {
+    transform: scale(1.3);
 }
 
 
@@ -92,4 +110,9 @@
     background-color: #ede7e7;
     margin-bottom: 10px;
     cursor: pointer;
+    transition: .2s linear;
+}
+
+.back:hover {
+    transform: scale(1.3);
 }

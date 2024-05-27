@@ -1,12 +1,12 @@
-.newPost {
+.editPostPage {
     flex-grow: 1;
 }
 
-/* .newPostForm {
+.editPostForm {
 	flex-grow: 1;
-} */
+}
 
-.newPostTitle {
+.editPostTitle {
 	font-size: 32px;
     margin: 20px 0;
 }
@@ -28,7 +28,7 @@
 }
 
 .formField input,
-.newPostForm textarea {
+.editPostForm textarea {
 	margin: 10px 0;
 	width: 100%;
 	min-height: 48px;
@@ -39,16 +39,16 @@
     background: transparent;
 }
 
-.newPostForm textarea {
+.editPostForm textarea {
 	height: 300px;
 }
 
-.newPostBtnBox {
+.editPostBtnBox {
 	margin-top: 20px;
 	margin-bottom: 100px;
 }
 
-.addPost {
+.editPost {
 	width: 80px;
 	height: 40px;
 	margin-right: 15px;
@@ -56,7 +56,6 @@
 	border-radius: 10px;
 	background-color: #ede7e7;
 	color: #66d8f5;
-    transition: .2s linear;
 }
 
 .cancelPost {
@@ -67,10 +66,9 @@
 	border-radius: 10px;
 	background-color: #ede7e7;
 	color: red;
-    transition: .2s linear;
     
 }
-.addPost:hover,
+.editPost:hover,
 .cancelPost:hover {
     transform: scale(1.8, 1.4);
     

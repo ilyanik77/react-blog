@@ -2,20 +2,13 @@ import React from 'react'
 import './nav.css'
 
 import { Link } from 'react-router-dom'
+import Search from '../Search/Search'
 
-const Nav = ({ search, setSearch }) => {
+const Nav = () => {
 	return (
 		<nav className='nav'>
 			<div className='navContent container'>
-				<form className='navSearch' onSubmit={e => e.preventDefault()}>
-					<input
-						type='text'
-						id='search'
-						placeholder='Search post'
-						value={search}
-						onChange={e => setSearch(e.target.value)}
-					/>
-				</form>
+				<Search />
 				<ul className='navList'>
 					<li className='navListItem'>
 						<Link to='/'>Home</Link>

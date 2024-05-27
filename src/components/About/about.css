@@ -1,0 +1,13 @@
+.about {
+    flex-grow: 1;
+}
+
+.aboutTitle {
+    font-size: 32px;
+    margin: 20px 0;
+}
+
+.aboutText {
+    font-size: 26px;
+    margin-bottom: 50px;
+}

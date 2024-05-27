@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './newPost.css'
 
 import { MdPostAdd } from 'react-icons/md'
-import { MdCancelPresentation } from "react-icons/md";
+import { MdCancelPresentation } from 'react-icons/md'
 
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -43,47 +43,47 @@ const NewPost = () => {
 
 	return (
 		<section className='newPost'>
-			
-			<h2 className='postTitle'>New Post</h2>
-			<form className='postForm' onSubmit={e => e.preventDefault()}>
-				<label className=''>
-					Прикрепить изорбажение:
-					<input
-						type='file'
-						className='hidden'
-						onChange={e => setImage(URL.createObjectURL(e.target.files[0]))}
-					/>
-				</label>
-				<div>{<img src={image} alt={image.name} />}</div>
+			<div className='newPostContent container'>
+				<h2 className='newPostTitle'>New Post</h2>
+				<form className='newPostForm' onSubmit={e => e.preventDefault()}>
+					<label className='formField'>
+						Прикрепить изорбажение:
+						<input
+							type='file'
+							onChange={e => setImage(URL.createObjectURL(e.target.files[0]))}
+						/>
+					</label>
+					<div className='formFieldImg'>
+						{<img src={image} alt={image.name} />}
+					</div>
 
-				<label className='/'>
-					Заголовок поста:
-					<input
-						type='text'
-						value={title}
-						onChange={e => setTitle(e.target.value)}
-						className=''
-					/>
-				</label>
+					<label className='formField'>
+						Заголовок поста:
+						<input
+							type='text'
+							value={title}
+							onChange={e => setTitle(e.target.value)}
+						/>
+					</label>
 
-				<label className=''>
-					Текст поста:
-					<textarea
-						value={text}
-						onChange={e => setText(e.target.value)}
-						className=''
-					/>
-				</label>
+					<label className='formField'>
+						Текст поста:
+						<textarea
+							value={text}
+							onChange={e => setText(e.target.value)}
+						/>
+					</label>
 
-				<div className=''>
-					<MdPostAdd className='addPost' onClick={submitHandler} />
+					<div className='newPostBtnBox'>
+						<MdPostAdd className='addPost' onClick={submitHandler} />
 
-					<MdCancelPresentation
-						className='cancelPost'
-						onClick={clearFormHandler}
-					/>
-				</div>
-			</form>
+						<MdCancelPresentation
+							className='cancelPost'
+							onClick={clearFormHandler}
+						/>
+					</div>
+				</form>
+			</div>
 		</section>
 	)
 }

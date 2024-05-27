@@ -4,11 +4,11 @@ import { Route, Routes } from "react-router-dom";
 //import { format } from "date-fns";
 import Home from "./components/Home/Home";
 import Layout from "./Layout";
-import About from "./About";
-import Missing from "./Missing";
+import About from "./components/About/About";
+import Missing from "./components/Missing/Missing";
 import PostPage from "./components/PostPage/PostPage";
 import NewPost from './components/NewPost/NewPost'
-import EditPost from "./EditPost";
+import EditPost from "./components/EditPost/EditPost";
 
 
 function App() {

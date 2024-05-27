@@ -1,0 +1,25 @@
+.missing {
+    flex-grow: 1;
+}
+
+.missingTitle {
+    font-size: 32px;
+    margin: 20px 0;
+}
+
+.missingText {
+    font-size: 26px;
+    margin-bottom: 50px;
+}
+
+.onHome {
+    background: #66d8f5;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: .2s linear;
+}
+
+.onHome:hover {
+
+    background: #3daeca;
+}
