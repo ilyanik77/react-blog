@@ -6,15 +6,14 @@ import { MdCancelPresentation } from 'react-icons/md'
 
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { addPost } from '../../redux/features/post/postSlice.js'
+import { createPost } from '../../redux/features/post/postSlice.js'
 
 import { format } from 'date-fns'
 import { v4 } from 'uuid'
 
-const NewPost = () => {
+const NewPost = (e) => {
 	const [title, setTitle] = useState('')
 	const [text, setText] = useState('')
-	const [image, setImage] = useState('')
 
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -23,13 +22,12 @@ const NewPost = () => {
 		try {
 			const newPost = {
 				id: v4(),
-				img: image,
 				title: title,
 				body: text,
 				datetime: format(new Date(), 'MMM dd, yyyy pp'),
 			}
 
-			dispatch(addPost(newPost))
+			dispatch(createPost(newPost))
 			navigate('/')
 		} catch (error) {
 			console.log(error)
@@ -46,16 +44,7 @@ const NewPost = () => {
 			<div className='newPostContent container'>
 				<h2 className='newPostTitle'>New Post</h2>
 				<form className='newPostForm' onSubmit={e => e.preventDefault()}>
-					<label className='formField'>
-						Прикрепить изорбажение:
-						<input
-							type='file'
-							onChange={e => setImage(URL.createObjectURL(e.target.files[0]))}
-						/>
-					</label>
-					<div className='formFieldImg'>
-						{<img src={image} alt={image.name} />}
-					</div>
+					
 
 					<label className='formField'>
 						Заголовок поста:
@@ -68,10 +57,7 @@ const NewPost = () => {
 
 					<label className='formField'>
 						Текст поста:
-						<textarea
-							value={text}
-							onChange={e => setText(e.target.value)}
-						/>
+						<textarea value={text} onChange={e => setText(e.target.value)} />
 					</label>
 
 					<div className='newPostBtnBox'>

@@ -13,6 +13,16 @@
     
 }
 
+.postImg {
+    width: 500px;
+}
+
+.postImg img {
+    width: 100%;
+    margin-bottom: 15px
+}
+
+
 .postDescr {
     padding: 20px 0;
     border-bottom: 1px solid lightgray;
@@ -70,9 +80,6 @@
     transform: scale(1.2);
 }
 
-.buttonBox {
-
-}
 
 .deleteBtn{
     margin-left: 15px;

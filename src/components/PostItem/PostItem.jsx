@@ -3,6 +3,7 @@ import './postItem.css'
 import { Link } from "react-router-dom"
 
 const PostItem = ({post}) => {
+  
   return (
 		<article className='postItem'>
 			<Link to={`post/${post.id}`}>

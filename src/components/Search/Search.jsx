@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Search = ({ search, setSearch }) => {
+const Search = () => {
+
+    const [search, setSearch] = useState('')
+
 	return (
 		<>
 			<form className='navSearch' onSubmit={e => e.preventDefault()}>

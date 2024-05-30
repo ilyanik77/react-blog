@@ -1,65 +1,90 @@
-import { createSlice } from '@reduxjs/toolkit'
-
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from '../../../api/axios.js'
 
 const initialState = {
-	posts: [
-		{
-			id: 1,
-			img: '',
-			title:
-				'Абзац 1.10.32 "de Finibus Bonorum et Malorum", написанный Цицероном в 45 году н.э.',
-			body: '"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem....."',
-			datetime: 'Dec 15, 2023 4:20:59 PM',
-		},
-		{
-			id: 2,
-			img: '',
-			title: 'Классический текст Lorem Ipsum, используемый с XVI века',
-			body: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
-			datetime: 'Dec 15, 2023 4:20:23 PM',
-		},
-		{
-			id: 3,
-			img: '',
-			title: 'Где его взять?',
-			body: 'Есть много вариантов Lorem Ipsum, но большинство из них имеет не всегда приемлемые модификации, например, юмористические вставки или слова, которые даже отдалённо не напоминают латынь. ',
-			datetime: 'Dec 15, 2023 4:19:57 PM',
-		},
-		{
-			id: 4,
-			img: '',
-			title: 'Почему он используется?',
-			body: 'Давно выяснено, что при оценке дизайна и композиции читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому, что тот обеспечивает более или менее стандартное заполнение шаблона, а также реальное распределение букв и пробелов в абзацах, которое не получается при простой дубликации "Здесь ваш текст.. Здесь ваш текст.. Здесь ваш текст.." ',
-			datetime: 'Dec 15, 2023 4:19:32 PM',
-		},
-		{
-			id: 6,
-			img: '',
-			title: 'Откуда он появился? Это',
-			body: 'Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, но это не совсем так. Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur", и занялся его поисками в классической латинской литературе. В результате он нашёл неоспоримый первоисточник Lorem Ipsum в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum" ("О пределах добра и зла"), написанной Цицероном в 45 году н.э. Этот трактат по теории этики был очень популярен в эпоху Возрождения. Первая строка Lorem Ipsum, "Lorem ipsum dolor sit amet..", происходит от одной из строк в разделе 1.10.32',
-			datetime: 'Dec 22, 2023 6:19:18 PM',
-		},
-	],
+	posts: [],
 }
+
+// Получаение всех постов
+export const getAllPosts = createAsyncThunk('post/getAllPosts', async () => {
+	try {
+		const { data } = await axios.get('/posts')
+		return data
+	} catch (error) {
+		console.log(error)
+	}
+})
+
+// Создание поста
+export const createPost = createAsyncThunk('post/createPost', async params => {
+	try {
+		const { data } = await axios.post('/posts', params)
+		return data
+	} catch (error) {
+		console.log(error)
+	}
+})
+
+// Удаление поста
+export const removePost = createAsyncThunk('post/removePost', async id => {
+	try {
+		const { data } = await axios.delete(`/posts/${id}`, id)
+		return data
+	} catch (error) {
+		console.log(error)
+	}
+})
+
+// Обновление поста
+export const updatePost = createAsyncThunk(
+	'post/updatePost',
+	async updatedPost => {
+		try {
+			const { data } = await axios.put(`/posts/${editPost.id}`, editPost)
+			return data
+		} catch (error) {
+			console.log(error)
+		}
+	}
+)
+
 
 
 
 export const postSlice = createSlice({
 	name: 'post',
 	initialState,
-	reducers: {
-		addPost: (state, action) => {
-			state.posts.push(action.payload)
-		},
-
-		removePost: (state, action) => {
-			state.posts = state.posts.filter(post => post.id !== action.payload)
-		},
-
-		editPost: (state, action) => {state.posts.push(action.payload)}
+	reducers: {},
+	extraReducers: builder => {
+		builder
+			// Получаение всех постов
+			.addCase(getAllPosts.fulfilled, (state, action) => {
+				
+				state.posts = action.payload.posts
+				state.popularPosts = action.payload.popularPosts
+			})
+			// Создание поста
+			.addCase(createPost.fulfilled, (state, action) => {
+				
+				state.posts.unshift(action.payload)
+			})
+			// Удаление поста
+			.addCase(removePost.fulfilled, (state, action) => {
+				
+				state.posts = state.posts.filter(
+					post => post._id !== action.payload._id
+				)
+			})
+			// Обновление поста
+			.addCase(updatePost.fulfilled, (state, action) => {
+				
+				const index = state.posts.findIndex(
+					post => post._id === action.payload._id
+				)
+				state.posts[index] = action.payload
+			})
 	},
 })
 
-
-export const { addPost, removePost, editPost } = postSlice.actions
+export const { addPost, editPost } = postSlice.actions
 export default postSlice.reducer

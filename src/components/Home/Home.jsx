@@ -1,15 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './home.css'
 
-import { useSelector } from 'react-redux'
+
+import axios from '../../api/axios'
+
 import PostItem from '../PostItem/PostItem'
 
 const Home = () => {
-	const { posts } = useSelector(state => state.post)
+	const [posts, setPosts] = useState([])
 
-	if (!posts.length) {
-		return <div className=''>Постов не существует.</div>
-	}
+
+	useEffect(() => {
+		const fetchPosts = async () => {
+			try {
+				const response = await axios.get('/posts')
+				setPosts(response.data)
+			} catch (error) {
+				if (error.response) {
+					console.log(error.response.data)
+					console.log(error.response.status)
+				} else {
+					console.log(`Error: ${error.message}`)
+				}
+			}
+		}
+		fetchPosts()
+	}, [ ])
+
 
 	return (
 		<section className='home'>
